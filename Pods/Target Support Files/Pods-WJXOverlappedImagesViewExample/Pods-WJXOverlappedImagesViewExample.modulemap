@@ -1,0 +1,6 @@
+framework module Pods_WJXOverlappedImagesViewExample {
+  umbrella header "Pods-WJXOverlappedImagesViewExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
