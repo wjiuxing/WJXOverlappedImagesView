@@ -5,8 +5,8 @@ use_frameworks!
 target :WJXOverlappedImagesViewExample do
 
 pod 'YYWebImage', :git => 'https://github.com/ibireme/YYWebImage.git'
-pod 'SDWebImage', '4.4.6'
-pod 'Kingfisher', '5.2.0'
+pod 'SDWebImage', '5.0.1'
+pod 'Kingfisher', '5.3.1'
 pod 'KMCGeigerCounter', '0.3.0'
 
 end

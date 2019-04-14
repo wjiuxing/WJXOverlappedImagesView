@@ -1,9 +1,9 @@
 PODS:
-  - Kingfisher (5.2.0)
+  - Kingfisher (5.3.1)
   - KMCGeigerCounter (0.3.0)
-  - SDWebImage (4.4.6):
-    - SDWebImage/Core (= 4.4.6)
-  - SDWebImage/Core (4.4.6)
+  - SDWebImage (5.0.1):
+    - SDWebImage/Core (= 5.0.1)
+  - SDWebImage/Core (5.0.1)
   - YYCache (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -13,9 +13,9 @@ PODS:
     - YYImage
 
 DEPENDENCIES:
-  - Kingfisher (= 5.2.0)
+  - Kingfisher (= 5.3.1)
   - KMCGeigerCounter (= 0.3.0)
-  - SDWebImage (= 4.4.6)
+  - SDWebImage (= 5.0.1)
   - YYWebImage (from `https://github.com/ibireme/YYWebImage.git`)
 
 SPEC REPOS:
@@ -36,13 +36,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ibireme/YYWebImage.git
 
 SPEC CHECKSUMS:
-  Kingfisher: 07067cfacf371117330dceb4b4b8f5c4b691ab42
+  Kingfisher: d9e7e0b209b59b8f9873aa2f37654e81a7beea51
   KMCGeigerCounter: a06cfeed4a96e8f9a49028abb3ba7e53604d3219
-  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 77eaea64462cf309e2c6f9fa59481773636234b5
+PODFILE CHECKSUM: f4aa3f90f9b64e2e04f7c7bbacbe97ab17fbe5c4
 
 COCOAPODS: 1.6.1
