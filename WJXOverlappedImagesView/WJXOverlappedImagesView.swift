@@ -17,7 +17,7 @@ fileprivate extension UIImageView {
         static var iconHeightKey = "UIImageView.iconHeight"
     }
     
-    fileprivate var maskLayer: CAShapeLayer {
+    var maskLayer: CAShapeLayer {
         get {
             if let layer = objc_getAssociatedObject(self, &AssociatedKeys.maskLayerKey) as? CAShapeLayer {
                 return layer
@@ -65,7 +65,7 @@ fileprivate extension UIImageView {
         }
     }
     
-    fileprivate var borderColor: UIColor? {
+    var borderColor: UIColor? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.borderColorKey) as? UIColor }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.borderColorKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -103,7 +103,7 @@ fileprivate extension UIImageView {
         }
     }
     
-    fileprivate convenience init(iconHeight: CGFloat, borderWidth: CGFloat) {
+    convenience init(iconHeight: CGFloat, borderWidth: CGFloat) {
         self.init(frame: CGRect(x: 0, y: 0, width: iconHeight, height: iconHeight))
         
         self.borderWidth = borderWidth
@@ -112,7 +112,7 @@ fileprivate extension UIImageView {
     }
 }
 
-class WJXOverlappedImagesView: UIView {
+public class WJXOverlappedImagesView: UIView {
     public var imageUrls: [String]!
     public var imageHeight: CGFloat = 44
     public var overlapDistance: CGFloat = 16
@@ -128,9 +128,11 @@ class WJXOverlappedImagesView: UIView {
         return image
     }()
     
-    typealias WJXOverlappedImagesViewImageFetcher = (WJXOverlappedImagesView, UIImageView, String, Int) -> Void
-    
+    public typealias WJXOverlappedImagesViewImageFetcher = (WJXOverlappedImagesView, UIImageView, String, Int) -> Void
     public var imageFetcher: WJXOverlappedImagesViewImageFetcher!
+    
+    public typealias WJXOverlappedImagesViewImageFetchCanceler = (WJXOverlappedImagesView, UIImageView, Int) -> Void
+    public var imageFetchCanceler: WJXOverlappedImagesViewImageFetchCanceler?
     
     fileprivate var imageViews: [UIImageView] = []
     fileprivate lazy var moreIndicatorImageView: UIImageView = {
@@ -139,12 +141,13 @@ class WJXOverlappedImagesView: UIView {
         imageView.borderWidth = imageBorderWidth
         imageView.image = moreIndicatorImage
         imageView.backgroundColor = UIColor.white
+        imageView.layer.zPosition = 100 // bring it to the most front of the screen.
         addSubview(imageView)
         
         return imageView
     }()
     
-    override var intrinsicContentSize: CGSize {
+    override public var intrinsicContentSize: CGSize {
         let exceed: Bool = imageUrls.count > maxLimit
         
         var count: Int = exceed ? maxLimit : imageUrls.count
@@ -167,8 +170,17 @@ class WJXOverlappedImagesView: UIView {
         let exceed: Bool = self.imageUrls.count > maxLimit
         let imageUrls: [String] = exceed ? Array((self.imageUrls?[0..<maxLimit])!) : self.imageUrls
         
-        while imageUrls.count < imageViews.count {
-            imageViews.removeLast().removeFromSuperview()
+        if let canceler = imageFetchCanceler {
+            while imageUrls.count < imageViews.count {
+                let index = imageViews.endIndex - 1
+                let imageView = imageViews.removeLast()
+                canceler(self, imageView, index)
+                imageView.removeFromSuperview()
+            }
+        } else {
+            while imageUrls.count < imageViews.count {
+                imageViews.removeLast().removeFromSuperview()
+            }
         }
         
         while imageUrls.count > imageViews.count {
@@ -192,8 +204,6 @@ class WJXOverlappedImagesView: UIView {
             moreIndicatorImageView.borderWidth = imageBorderWidth
             moreIndicatorImageView.image = moreIndicatorImage
             moreIndicatorImageView.isHidden = false
-            
-            bringSubviewToFront(moreIndicatorImageView)
         } else {
             moreIndicatorImageView.isHidden = true
         }

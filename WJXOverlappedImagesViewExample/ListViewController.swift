@@ -42,8 +42,12 @@ class ListCell: UITableViewCell {
         
         imagesView = WJXOverlappedImagesView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.size.width, height: contentView.bounds.size.height))
         imagesView.imageFetcher = { imagesView, imageView, url, index in
-            imageView.kf.setImage(with: URL(string: url))
+            imageView.kf.setImage(with: URL(string: url), placeholder: UIImage(named: "demo-avatar"))
         }
+        imagesView.imageFetchCanceler = { imagesView, imageView, index in
+            imageView.kf.cancelDownloadTask()
+        }
+        
         contentView.addSubview(imagesView)
     }
     

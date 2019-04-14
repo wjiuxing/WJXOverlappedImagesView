@@ -21,13 +21,19 @@ class ViewController: UIViewController {
         
         overlappedImagesView.imageFetcher = { imagesView, imageView, url, index in
             // fetch image via YYWebImage
-            imageView.yy_setImage(with: URL(string: url)!, placeholder: nil)
+//            imageView.yy_setImage(with: URL(string: url)!, placeholder: UIImage(named: "demo-avatar"))
             
             // fetch image via Kingfisher
-            //imageView.kf.setImage(with: URL(string: url))
+//            imageView.kf.setImage(with: URL(string: url), placeholder: UIImage(named: "demo-avatar"))
             
             // fetch image via SDWebImage
-            //imageView.sd_setImage(with: URL(string: url))
+            imageView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "demo-avatar"))
+        }
+        
+        overlappedImagesView.imageFetchCanceler = { imagesView, imageView, index in
+//            imageView.yy_cancelCurrentImageRequest()
+//            imageView.kf.cancelDownloadTask()
+            imageView.sd_cancelCurrentImageLoad()
         }
         
         overlappedImagesView.updateInTransaction { imagesView in
