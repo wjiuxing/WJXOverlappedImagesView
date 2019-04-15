@@ -120,6 +120,7 @@ public class WJXOverlappedImagesView: UIView {
     public var shouldShowMoreIndicatorImageViewWhenImageCountExceedsMaxLimit: Bool = true
     public var imageBorderWidth: CGFloat = 2.0
     public var imageBorderColor: UIColor = UIColor.white
+    public var forceToShowMoreIndicatorImageView: Bool = false
     
     public lazy var moreIndicatorImage: UIImage = {
         let bundlePath: String = Bundle.main.path(forResource: "WJXOverlappedImagesViewResource", ofType: "bundle")!
@@ -198,7 +199,8 @@ public class WJXOverlappedImagesView: UIView {
             imageFetcher(self, imageView, imageUrl, index)
         }
         
-        if shouldShowMoreIndicatorImageViewWhenImageCountExceedsMaxLimit && exceed {
+        if forceToShowMoreIndicatorImageView
+            || (shouldShowMoreIndicatorImageViewWhenImageCountExceedsMaxLimit && exceed) {
             moreIndicatorImageView.frame = CGRect(x: (imageHeight - overlapDistance) * CGFloat(imageUrls.count), y: 0, width: imageHeight, height: imageHeight)
             moreIndicatorImageView.borderColor = imageBorderColor
             moreIndicatorImageView.borderWidth = imageBorderWidth
