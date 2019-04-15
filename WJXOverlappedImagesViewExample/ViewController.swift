@@ -14,6 +14,17 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var overlappedImagesView: WJXOverlappedImagesView!
     
+    private lazy var imageUrls =  [
+        "https://avatars1.githubusercontent.com/u/4176744?v=40&s=132",
+        "https://avatars1.githubusercontent.com/u/565251?v=3&s=132",
+        "https://avatars2.githubusercontent.com/u/587874?v=3&s=132",
+        "https://avatars2.githubusercontent.com/u/1019875?v=4&s=132",
+        "https://avatars2.githubusercontent.com/u/839283?v=4&s=132",
+        "https://avatars0.githubusercontent.com/u/724423?v=3&s=132",
+        "https://avatars3.githubusercontent.com/u/602569?v=4&s=132",
+        "https://avatars1.githubusercontent.com/u/8086633?v=3&s=132",
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,17 +54,7 @@ class ViewController: UIViewController {
             imagesView.overlapDistance = 16
             imagesView.shouldShowMoreIndicatorImageViewWhenImageCountExceedsMaxLimit = true
             imagesView.maxLimit = 4
-            
-            imagesView.imageUrls = [
-                "https://avatars1.githubusercontent.com/u/4176744?v=40&s=132",
-                "https://avatars1.githubusercontent.com/u/565251?v=3&s=132",
-                "https://avatars2.githubusercontent.com/u/587874?v=3&s=132",
-                "https://avatars2.githubusercontent.com/u/1019875?v=4&s=132",
-                "https://avatars2.githubusercontent.com/u/839283?v=4&s=132",
-                "https://avatars0.githubusercontent.com/u/724423?v=3&s=132",
-                "https://avatars3.githubusercontent.com/u/602569?v=4&s=132",
-                "https://avatars1.githubusercontent.com/u/8086633?v=3&s=132",
-            ]
+            imagesView.imageUrls = self.imageUrls
         }
     }
     
@@ -74,7 +75,6 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var distanceLabel: UILabel!
-    
     @IBAction func distanceSliderChanged(_ sender: UISlider) {
         let distance = sender.value
         overlappedImagesView.updateInTransaction { imagesView in
@@ -82,5 +82,20 @@ class ViewController: UIViewController {
         }
         
         distanceLabel.text = "\(distance)"
+    }
+    
+    @IBAction func forceToShowMoreIndicatorChanged(_ sender: UISwitch) {
+        overlappedImagesView.updateInTransaction { imagesView in
+            imagesView.forceToShowMoreIndicatorImageView = sender.isOn
+        }
+    }
+    
+    @IBOutlet weak var imageUrlsCountLabel: UILabel!
+    @IBAction func imageUrlsCountDidChange(_ sender: UIStepper) {
+        let count = Int(sender.value)
+        overlappedImagesView.updateInTransaction { imagesView in
+            imagesView.imageUrls = Array(self.imageUrls[0..<count])
+            self.imageUrlsCountLabel.text = "\(count)"
+        }
     }
 }
