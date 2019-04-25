@@ -123,8 +123,8 @@ public class WJXOverlappedImagesView: UIView {
     public var forceToShowMoreIndicatorImageView: Bool = false
     
     public lazy var moreIndicatorImage: UIImage = {
-        let bundlePath: String = Bundle.main.path(forResource: "WJXOverlappedImagesViewResource", ofType: "bundle")!
-        let imagePath: String = bundlePath.appending("/more.png")
+        let bundle = Bundle(for: WJXOverlappedImagesView.self)
+        let imagePath: String = bundle.resourcePath! + "/WJXOverlappedImagesViewResource.bundle/more.png"
         let image: UIImage = UIImage(contentsOfFile: imagePath)!
         return image
     }()
