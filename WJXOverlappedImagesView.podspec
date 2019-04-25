@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "WJXOverlappedImagesView"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "WJXOverlappedImagesView is made up of a group of round-cornered image views whitch over lapped on each other with some distance.."
 
   spec.description  = <<-DESC
