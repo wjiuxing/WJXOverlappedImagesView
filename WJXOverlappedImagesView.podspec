@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
                    DESC
 
   spec.homepage     = "https://github.com/wjiuxing/WJXOverlappedImagesView"
-  # spec.screenshots  = "https://github.com/wjiuxing/WJXOverlappedImagesView/DemoPictures/overlapped-images-view.gif"
+  spec.screenshots  = "https://raw.githubusercontent.com/wjiuxing/WJXOverlappedImagesView/master/DemoPictures/overlapped-images-view.gif"
 
   spec.license      = "MIT"
   # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
@@ -31,7 +31,7 @@ Pod::Spec.new do |spec|
 
   spec.resource		= "WJXOverlappedImagesView/WJXOverlappedImagesViewResource.bundle"
 
-  spec.swift_version = "4.2"
+  spec.swift_version = "5.0"
 
 end
 
